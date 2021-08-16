@@ -1,0 +1,30 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.1.6.RELEASE' // Doesn't work
+//        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.5.3' // Works
+    }
+}
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.5.21'
+    id "io.gitlab.arturbosch.detekt" version "1.18.0"
+}
+
+detekt {
+    buildUponDefaultConfig = true
+    config = files("$projectDir/detekt.yml")
+}
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+bootJar {
+    baseName = 'cyrk'
+    version = '1.0'
+}
